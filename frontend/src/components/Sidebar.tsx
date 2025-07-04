@@ -40,7 +40,10 @@ export default function Sidebar() {
           <Link
             className="flex items-center gap-2 font-semibold"
             href="/dashboard"
-            style={{ "--brand-orange": "#fd6a3e", "--brand-navy": "#022e7d" }}
+            style={{
+              "--brand-orange": "#fd6a3e",
+              "--brand-navy": "#022e7d",
+            } as React.CSSProperties}
           >
             <GraduationCap
               className="h-6 w-6"

@@ -55,7 +55,7 @@ const DetailsSection = ({ content }: { content: string }) => {
   const headerCellStyle = `${tableCellStyle} font-semibold bg-slate-100 w-1/6`; // Applied PDF color scheme
 
   return (
-    <Table bordered>
+    <Table border={1}>
       <TableBody>
         <TableRow>
           <TableCell className={headerCellStyle}>Subject</TableCell>
