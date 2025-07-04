@@ -4,17 +4,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Bell,
   Home,
-  LineChart,
   Package,
-  Users,
   BotMessageSquare,
   FileText,
   GraduationCap,
   Sparkles,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils"; // shadcn-ui helper
 
 const navItems = [

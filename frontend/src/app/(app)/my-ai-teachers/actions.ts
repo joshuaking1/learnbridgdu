@@ -94,11 +94,14 @@ export async function createAiTeacher(input: z.infer<typeof formSchema>) {
 
     revalidatePath("/my-ai-teachers");
     return { success: true, message: `${name} has been created!` };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Fal.ai Error:", error);
     return {
       success: false,
-      message: error.message || "An unknown error occurred with the AI.",
+      message:
+        error instanceof Error
+          ? error.message
+          : "An unknown error occurred with the AI.",
     };
   }
 }

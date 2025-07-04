@@ -79,9 +79,10 @@ function CreateTeacherDialog() {
         setIsOpen(false);
         form.reset();
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Error Creating Teacher", {
-        description: error.message,
+        description:
+          error instanceof Error ? error.message : "An unknown error occurred",
       });
     } finally {
       setIsLoading(false);
@@ -107,7 +108,7 @@ function CreateTeacherDialog() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>AI Teacher's Name</FormLabel>
+                  <FormLabel>AI Teacher&apos;s Name</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g. Prof. Kofi" {...field} />
                   </FormControl>
@@ -208,7 +209,7 @@ export default function MyAiTeachersPage() {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) return;
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("ai_teachers")
         .select("*")
         .eq("user_id", user.id);
@@ -216,7 +217,7 @@ export default function MyAiTeachersPage() {
       setLoading(false);
     };
     fetchTeachers();
-  }, []);
+  }, [supabase]);
 
   return (
     <div className="space-y-6">
@@ -245,7 +246,7 @@ export default function MyAiTeachersPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm italic">
-                    "{teacher.personality_trait}"
+                    &quot;{teacher.personality_trait}&quot;
                   </p>
                 </CardContent>
                 <CardFooter>

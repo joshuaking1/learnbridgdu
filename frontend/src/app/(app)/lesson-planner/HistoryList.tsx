@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ReactMarkdown from "react-markdown";
+
 import { format } from "date-fns";
 import SBCLessonPlanDisplay from "@/components/SBCLessonPlanDisplay";
 
@@ -57,7 +57,7 @@ export default function HistoryList() {
     };
 
     fetchLessonPlans();
-  }, []);
+  }, [supabase]);
 
   if (loading) {
     return <Skeleton className="w-full h-[200px]" />;
