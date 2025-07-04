@@ -62,7 +62,7 @@ type Resource = {
   subject: string;
   grade_level: string;
   file_path: string;
-  profiles: { username: string | null } | null;
+  profiles: { username: string | null }[] | null;
 };
 
 function UploadDialog() {
@@ -222,7 +222,7 @@ function UploadDialog() {
             <FormField
               control={form.control}
               name="file"
-              render={({ field: { onChange, ...props } }) => (
+              render={({ field: { onChange, value, ...props } }) => (
                 <FormItem>
                   <FormLabel>File</FormLabel>
                   <FormControl>
@@ -260,7 +260,7 @@ export default function ResourceHubPage() {
         .select(
           `
                     id, title, description, subject, grade_level, file_path,
-                    profiles ( username )
+                    profiles!inner ( username )
                 `
         )
         .order("created_at", { ascending: false });
@@ -301,7 +301,7 @@ export default function ResourceHubPage() {
                 <CardHeader>
                   <CardTitle className="truncate">{resource.title}</CardTitle>
                   <CardDescription>
-                    by @{resource.profiles?.username || "Unknown"}
+                    by @{resource.profiles?.[0]?.username || "Unknown"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

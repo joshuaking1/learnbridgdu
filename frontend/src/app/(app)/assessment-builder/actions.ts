@@ -162,14 +162,14 @@ export async function generateAssessment(input: z.infer<typeof formSchema>) {
       }
 
       // --- FINAL STEP: Save to Database ---
-      if (finalToS && finalQuestionsObject.questions) {
+      if (finalToS && (finalQuestionsObject as z.infer<typeof questionsSchema>).questions) {
         const { error } = await supabase.from("assessments").insert({
           user_id: user.id,
           subject,
           grade_level: gradeLevel,
           topic,
           generated_tos: finalToS,
-          generated_questions: (finalQuestionsObject as { questions: unknown }).questions,
+          generated_questions: JSON.stringify((finalQuestionsObject as { questions: unknown }).questions),
         });
         if (error) {
           console.error("DB Save Error:", error);

@@ -50,7 +50,10 @@ export default function LoginPage() {
   return (
     <div
       className="flex items-center justify-center min-h-screen bg-gray-50"
-      style={{ "--brand-orange": "#fd6a3e", "--brand-navy": "#022e7d" }}
+      style={{
+        "--brand-orange": "#fd6a3e",
+        "--brand-navy": "#022e7d",
+      } as React.CSSProperties}
     >
       <Card className="w-full max-w-md mx-4">
         <CardHeader className="text-center">
