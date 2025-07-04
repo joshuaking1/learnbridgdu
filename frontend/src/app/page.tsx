@@ -48,7 +48,7 @@ export default function LandingPage() {
     }
 
     // 2. Create the user account
-    const { data, error: signUpError } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {

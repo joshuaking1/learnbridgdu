@@ -120,7 +120,7 @@ export async function generateAssessment(input: z.infer<typeof formSchema>) {
             Return the output as a single, valid JSON object matching the provided schema.
         `;
 
-      let finalQuestionsObject: any = {};
+      let finalQuestionsObject: object = {};
       try {
         console.log("Starting questions generation...");
         const result = await streamObject({
@@ -169,7 +169,7 @@ export async function generateAssessment(input: z.infer<typeof formSchema>) {
           grade_level: gradeLevel,
           topic,
           generated_tos: finalToS,
-          generated_questions: finalQuestionsObject.questions as any,
+          generated_questions: (finalQuestionsObject as { questions: unknown }).questions,
         });
         if (error) {
           console.error("DB Save Error:", error);

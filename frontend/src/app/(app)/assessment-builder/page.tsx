@@ -52,16 +52,7 @@ const formSchema = z
     path: ["numMcq"],
   });
 
-type AssessmentResult = {
-  tos: string;
-  questions: Array<{
-    type: "MCQ" | "SHORT_ANSWER";
-    cognitive_level: string;
-    question: string;
-    options?: string[];
-    answer: string;
-  }>;
-};
+
 
 export default function AssessmentBuilderPage() {
   const [isLoading, setIsLoading] = useState(false);

@@ -118,9 +118,12 @@ function UploadDialog() {
       });
       setIsOpen(false);
       form.reset();
-    } catch (serverError: any) {
+    } catch (serverError: unknown) {
       toast.error("Server Error", {
-        description: serverError.message,
+        description:
+          serverError instanceof Error
+            ? serverError.message
+            : "An unknown error occurred",
       });
     } finally {
       setIsUploading(false);
@@ -219,7 +222,7 @@ function UploadDialog() {
             <FormField
               control={form.control}
               name="file"
-              render={({ field: { onChange, value, ...props } }) => (
+              render={({ field: { onChange, ...props } }) => (
                 <FormItem>
                   <FormLabel>File</FormLabel>
                   <FormControl>
@@ -252,7 +255,7 @@ export default function ResourceHubPage() {
     const fetchResources = async () => {
       setLoading(true);
       // Fetch resources and the username of the uploader
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("resources")
         .select(
           `
@@ -267,7 +270,7 @@ export default function ResourceHubPage() {
     };
 
     fetchResources();
-  }, []);
+  }, [supabase]);
 
   const getPublicUrl = (filePath: string) => {
     const { data } = supabase.storage
